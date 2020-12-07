@@ -7,14 +7,12 @@ import java.time.Month;
 import java.util.HashSet;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.Assertions;
-import static com.gargoylesoftware.htmlunit.html.InputElementFactory.instance;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -307,13 +305,13 @@ public class AnimalTest {
     
     @Test
     public void testSetDateAddedMoreThanAWeekAgoBad() {
-        LocalDate badDate = LocalDate.now().minusWeeks(1));
+        LocalDate badDate = LocalDate.now().minusWeeks(1);
         LocalDate original = animal.getDateAdded();
         try{
             animal.setDateAdded(badDate);
             fail("The date added may not be longer than a week in the past.");           
         }
-        catch(IllegalArguementException iae){
+        catch(IllegalArgumentException iae){
             assertEquals(original, animal.getDateAdded());
         }
     }
@@ -326,7 +324,7 @@ public class AnimalTest {
             animal.setDateAdded(badDate);
             fail("The date added may not be in the future.");           
         }
-        catch(IllegalArguementException iae){
+        catch(IllegalArgumentException iae){
             assertEquals(original, animal.getDateAdded());
         }
     }
@@ -377,6 +375,7 @@ public class AnimalTest {
         Animal other = new Animal(GOOD_ID,
                 GOOD_NAME,
                 GOOD_GENDER,
+                GOOD_SPECIES,
                 GOOD_AGE,
                 GOOD_FIXED,
                 GOOD_LEGS,
@@ -386,6 +385,7 @@ public class AnimalTest {
         Animal instance = new Animal(GOOD_ID,
                 GOOD_NAME,
                 GOOD_GENDER,
+                GOOD_SPECIES,
                 GOOD_AGE,
                 GOOD_FIXED,
                 GOOD_LEGS,

@@ -20,11 +20,12 @@ public class Animal implements Comparable<Animal>{
     private LocalDate dateAdded;
     private LocalDateTime lastFeedingTime;
 
-    public Animal(String id, String name, String gender, int age, boolean fixed,
+    public Animal(String id, String name, String gender, String species, int age, boolean fixed,
             int legs, BigDecimal weight, LocalDate dateAdded, 
             LocalDateTime lastFeedingTime){
         setId(id);
         setName(name);
+        setSpecies(species);
         setGender(gender);
         setAge(age);
         setFixed(fixed);
@@ -59,9 +60,7 @@ public class Animal implements Comparable<Animal>{
     
     // TODO: Need idValidator method - Only allow it to change if it's "0". Do not allow an id to be set if the id is already in the idList
     private void idValidator(String id) {
-        if(! id.equals("0")){
-            throw new IllegalArgumentException("You can't change an id that has already been set.");
-        }
+        
         if (idList.contains(id)){
             throw new IllegalArgumentException("Id already in idList.");
         }
@@ -85,10 +84,7 @@ public class Animal implements Comparable<Animal>{
     }
   
     private void speciesValidator(String species) {
-        if(! species.equals("Unknown")){
-            throw new IllegalArgumentException("The species cannot be changed.");
-        }
-        if(!species.equals("cat") || !species.equals("dog") ){
+        if(!species.equals("cat") && !species.equals("dog") ){
             throw new IllegalArgumentException("The species of must be either cat or dog");
         } 
     }
@@ -175,7 +171,7 @@ public class Animal implements Comparable<Animal>{
     }
     
     public void  setWeight(BigDecimal lb){
-        weightValidator(weight);
+        weightValidator(lb);
         this.weight = lb;
     }
     
@@ -188,12 +184,12 @@ public class Animal implements Comparable<Animal>{
         }
     }
 
-    public LocalDate getdateAdded(){
+    public LocalDate getDateAdded(){
         return dateAdded;
     }
 
     public void setDateAdded(LocalDate ldt){
-        dateValidator(dateAdded);
+        dateValidator(ldt);
         dateAdded = ldt;
     }
     

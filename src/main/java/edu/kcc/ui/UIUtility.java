@@ -1,11 +1,13 @@
+
 package edu.kcc.ui;
-
-
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-
+/**
+ *
+ * @author nickloesel
+ */
 public class UIUtility {
 
     /**
