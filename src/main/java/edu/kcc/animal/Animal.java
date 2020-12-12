@@ -85,7 +85,8 @@ public class Animal implements Comparable<Animal>{
   
     private void speciesValidator(String species) {
         if(!species.equals("cat") && !species.equals("dog") ){
-            throw new IllegalArgumentException("The species of must be either cat or dog");
+            throw new IllegalArgumentException("The species of must be either cat or dog" );
+            
         } 
     }
     
@@ -109,6 +110,7 @@ public class Animal implements Comparable<Animal>{
                     this.gender = gender;
             }
             else{
+                System.out.println(gender);
                 System.out.println("Please enter 'male' or 'female' for "
                                         + "gender.");
             }
@@ -227,7 +229,9 @@ public class Animal implements Comparable<Animal>{
     @Override
     public String toString() {
         return "Animal {name: " + name + ", species: " + species + ", gender: "
-                + gender + ", age: " + age + ", weight: " + weight + "}";
+                + gender + ", age: " + age + ", weight: " + weight + 
+                ", Date added: " + dateAdded + ", Last feeding time: " +
+                lastFeedingTime + "}";
     }
     
     @Override

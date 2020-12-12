@@ -58,7 +58,7 @@ public class Main {
                     String AnimalName = UIUtility.getUserString(question);
                     UIUtility.showMessage("Searching for Animal " + AnimalName
                             + "...");
-                    getAnimalFromServer(AnimalName);
+                    System.out.println(getAnimalFromServer(AnimalName));
                     
                     break;
                 case "2":
@@ -80,33 +80,36 @@ public class Main {
         Socket socket = new Socket(HOST_NAME, PORT);
         DataInputStream inputStream = new DataInputStream(socket.getInputStream());
         DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+        DateTimeFormatter Dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                            .withLocale(Locale.US);
+        DateTimeFormatter DateTimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                            .withLocale(Locale.US);
         outputStream.writeUTF(AnimalName);
         outputStream.flush();
         
         String animalID = inputStream.readUTF();
-        String animalSpecies = inputStream.readUTF();
+        String animalName = inputStream.readUTF();
         String animalGender = inputStream.readUTF();
+        String animalSpecies = inputStream.readUTF();
+
         int animalAge = inputStream.readInt();
         boolean animalFixed = inputStream.readBoolean();
         int animalLegs = inputStream.readInt();
         BigDecimal animalWeight = new BigDecimal
         (inputStream.readDouble(), MathContext.DECIMAL32);
-        DateTimeFormatter Dateformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                            .withLocale(Locale.US);
-        DateTimeFormatter DateTimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                            .withLocale(Locale.US);
         
         String animalDateAddedUnformmated = inputStream.readUTF();
         String animalLastFeedingTimeUnformatted = inputStream.readUTF();
         LocalDate animalDateAddedFormatted = LocalDate.parse(animalDateAddedUnformmated, Dateformatter);
         LocalDateTime animalLastFeedingTimeFormatted = LocalDateTime.parse(animalLastFeedingTimeUnformatted, DateTimeformatter);
-        
-    
+        System.out.println(animalDateAddedFormatted);
         inputStream.close();
         outputStream.close();
-        Animal animal = new Animal(AnimalName, animalID, animalSpecies, 
-                animalGender, animalAge, animalFixed, animalLegs, animalWeight,
+        
+            Animal animal = new Animal( animalID, animalName,
+                    animalSpecies, animalGender, animalAge, animalFixed, animalLegs, animalWeight,
                 animalDateAddedFormatted, animalLastFeedingTimeFormatted);
+            
         return animal;
     }
     
